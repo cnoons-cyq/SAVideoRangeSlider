@@ -34,7 +34,6 @@
 @property (nonatomic, strong) SASliderLeft *leftThumb;
 @property (nonatomic, strong) SASliderRight *rightThumb;
 @property (nonatomic) CGFloat frame_width;
-@property (nonatomic) Float64 durationSeconds;
 @property (nonatomic, strong) SAResizibleBubble *popoverBubble;
 
 @end
