@@ -46,7 +46,7 @@
 @property (nonatomic, assign) NSInteger maxGap;
 @property (nonatomic, assign) NSInteger minGap;
 
-
+- (id)initWithFrame:(CGRect)frame asset:(AVAsset*)asset;
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
 - (void)setPopoverBubbleSize: (CGFloat) width height:(CGFloat)height;
 

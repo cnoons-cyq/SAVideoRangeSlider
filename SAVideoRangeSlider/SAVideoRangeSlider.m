@@ -45,12 +45,30 @@
 #define SLIDER_BORDERS_SIZE 6.0f
 #define BG_VIEW_BORDERS_SIZE 3.0f
 
+-(id)initWithFrame:(CGRect)frame asset:(AVAsset *)asset{
+    self = [self initWithFrame:frame];
+    if (self) {
+        [self getMovieFramesFromAsset:asset];
+    }
+    return self;
+}
 
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl{
     
+    self = [self initWithFrame:frame];
+    if (self) {
+        _videoUrl = videoUrl;
+        [self getMovieFrame];
+    }
+    
+    return self;
+}
+
+
+- (id)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
     if (self) {
-        
         _frame_width = frame.size.width;
         
         int thumbWidth = ceil(frame.size.width*0.05);
@@ -59,9 +77,6 @@
         _bgView.layer.borderColor = [UIColor grayColor].CGColor;
         _bgView.layer.borderWidth = BG_VIEW_BORDERS_SIZE;
         [self addSubview:_bgView];
-        
-        _videoUrl = videoUrl;
-        
         
         _topBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, SLIDER_BORDERS_SIZE)];
         _topBorder.backgroundColor = [UIColor colorWithRed: 0.996 green: 0.951 blue: 0.502 alpha: 1];
@@ -125,18 +140,6 @@
         
         [_popoverBubble addSubview:_bubleText];
         
-        [self getMovieFrame];
-    }
-    
-    return self;
-}
-
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
     }
     return self;
 }
@@ -326,10 +329,8 @@
 
 #pragma mark - Video
 
--(void)getMovieFrame{
-    
-    AVAsset *myAsset = [[AVURLAsset alloc] initWithURL:_videoUrl options:nil];
-    self.imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:myAsset];
+-(void)getMovieFramesFromAsset:(AVAsset*)asset{
+    self.imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
     
     if ([self isRetina]){
         self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width*2, _bgView.frame.size.height*2);
@@ -360,7 +361,7 @@
     }
     
     
-    _durationSeconds = CMTimeGetSeconds([myAsset duration]);
+    _durationSeconds = CMTimeGetSeconds([asset duration]);
     
     int picsCnt = ceil(_bgView.frame.size.width / picWidth);
     
@@ -396,7 +397,7 @@
             
             CGRect currentFrame = tmp.frame;
             currentFrame.origin.x = ii*picWidth;
-
+            
             currentFrame.size.width=picWidth;
             prefreWidth+=currentFrame.size.width;
             
@@ -405,12 +406,12 @@
             }
             tmp.frame = currentFrame;
             int all = (ii+1)*tmp.frame.size.width;
-
+            
             if (all > _bgView.frame.size.width){
                 int delta = all - _bgView.frame.size.width;
                 currentFrame.size.width -= delta;
             }
-
+            
             ii++;
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -482,6 +483,11 @@
                                                       NSLog(@"Canceled");
                                                   }
                                               }];
+}
+
+-(void)getMovieFrame{
+    AVAsset *myAsset = [[AVURLAsset alloc] initWithURL:_videoUrl options:nil];
+    [self getMovieFramesFromAsset:myAsset];
 }
 
 
