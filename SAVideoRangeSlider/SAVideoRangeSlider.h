@@ -45,6 +45,7 @@
 @property (nonatomic, strong) UIView *bottomBorder;
 @property (nonatomic, assign) NSInteger maxGap;
 @property (nonatomic, assign) NSInteger minGap;
+@property (nonatomic) Float64 durationSeconds;
 
 - (id)initWithFrame:(CGRect)frame asset:(AVAsset*)asset;
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
