@@ -180,7 +180,13 @@
     
 }
 
-
+-(void)setRangeHidden:(BOOL)rangeHidden{
+    _centerView.hidden = rangeHidden;
+    _leftThumb.hidden = rangeHidden;
+    _rightThumb.hidden = rangeHidden;
+    _topBorder.hidden = rangeHidden;
+    _bottomBorder.hidden = rangeHidden;
+}
 
 
 #pragma mark - Gestures
@@ -504,6 +510,7 @@
 {
     return _rightPosition * _durationSeconds / _frame_width;
 }
+
 
 
 

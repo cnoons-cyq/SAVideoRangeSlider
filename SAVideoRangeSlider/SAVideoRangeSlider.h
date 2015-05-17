@@ -46,6 +46,7 @@
 @property (nonatomic, assign) NSInteger maxGap;
 @property (nonatomic, assign) NSInteger minGap;
 @property (nonatomic) Float64 durationSeconds;
+@property (nonatomic, assign) BOOL rangeHidden;
 
 - (id)initWithFrame:(CGRect)frame asset:(AVAsset*)asset;
 - (id)initWithFrame:(CGRect)frame videoUrl:(NSURL *)videoUrl;
