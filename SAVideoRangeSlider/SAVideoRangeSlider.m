@@ -342,6 +342,7 @@
     } else {
         self.imageGenerator.maximumSize = CGSizeMake(_bgView.frame.size.width, _bgView.frame.size.height);
     }
+    self.imageGenerator.appliesPreferredTrackTransform = YES;
     
     int picWidth = 20;
     
@@ -574,7 +575,15 @@
 -(BOOL)isRetina{
     return ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
             
-            ([UIScreen mainScreen].scale == 2.0));
+            ([UIScreen mainScreen].scale >= 2.0));
+}
+
+-(CGFloat)displayScale{
+    if ([self isRetina]) {
+        return  [UIScreen mainScreen].scale;
+    }else{
+        return 1.0;
+    }
 }
 
 
