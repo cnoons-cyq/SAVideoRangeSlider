@@ -39,7 +39,7 @@
 @end
 
 @implementation SAVideoRangeSlider
-
+@synthesize leftPosition = _leftPosition, rightPosition =_rightPosition;
 
 #define SLIDER_BORDERS_SIZE 6.0f
 #define BG_VIEW_BORDERS_SIZE 3.0f
@@ -396,7 +396,6 @@
             }
             
             
-            
             UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
             
             
@@ -463,6 +462,7 @@
                                                       
                                                       
                                                       UIImageView *tmp = [[UIImageView alloc] initWithImage:videoScreen];
+                                                      tmp.contentMode = UIViewContentModeCenter;
                                                       
                                                       int all = (i+1)*tmp.frame.size.width;
                                                       
@@ -512,7 +512,15 @@
     return _rightPosition * _durationSeconds / _frame_width;
 }
 
+- (void)setLeftPosition:(CGFloat)leftPosition{
+    _leftPosition = leftPosition * _frame_width / _durationSeconds;
+    [self layoutSubviews];
+}
 
+-(void)setRightPosition:(CGFloat)rightPosition{
+    _rightPosition = rightPosition * _frame_width / _durationSeconds;
+    [self layoutSubviews];
+}
 
 
 
