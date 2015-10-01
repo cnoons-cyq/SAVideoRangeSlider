@@ -43,8 +43,8 @@
 @property (nonatomic, strong) UILabel *bubleText;
 @property (nonatomic, strong) UIView *topBorder;
 @property (nonatomic, strong) UIView *bottomBorder;
-@property (nonatomic, assign) NSInteger maxGap;
-@property (nonatomic, assign) NSInteger minGap;
+@property (nonatomic, assign) CGFloat maxGap;
+@property (nonatomic, assign) CGFloat minGap;
 @property (nonatomic) Float64 durationSeconds;
 @property (nonatomic, assign) BOOL rangeHidden;
 
