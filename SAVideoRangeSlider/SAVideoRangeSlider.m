@@ -159,13 +159,13 @@
 }
 
 
--(void)setMaxGap:(NSInteger)maxGap{
+-(void)setMaxGap:(CGFloat)maxGap{
     _leftPosition = 0;
     _rightPosition = _frame_width*maxGap/_durationSeconds;
     _maxGap = maxGap;
 }
 
--(void)setMinGap:(NSInteger)minGap{
+-(void)setMinGap:(CGFloat)minGap{
     _leftPosition = 0;
     _rightPosition = _frame_width*minGap/_durationSeconds;
     _minGap = minGap;
