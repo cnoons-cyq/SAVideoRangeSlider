@@ -24,24 +24,24 @@
 // THE SOFTWARE.
 
 #import "SAVideoRangeSlider.h"
-
+#define kAppleColor [UIColor colorWithRed:251.0f/255.0f green:168.0f/255.0f blue:72.0f/255.0f alpha:1.0f]
 @interface SAVideoRangeSlider ()
 
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UIView *centerView;
 @property (nonatomic, strong) NSURL *videoUrl;
-@property (nonatomic, strong) SASliderLeft *leftThumb;
-@property (nonatomic, strong) SASliderRight *rightThumb;
+@property (nonatomic, strong) UIView *leftThumb;
+@property (nonatomic, strong) UIView *rightThumb;
 @property (nonatomic) CGFloat frame_width;
-@property (nonatomic, strong) SAResizibleBubble *popoverBubble;
+@property (nonatomic, strong) UIView *popoverBubble;
 
 @end
 
 @implementation SAVideoRangeSlider
 @synthesize leftPosition = _leftPosition, rightPosition =_rightPosition;
 
-#define SLIDER_BORDERS_SIZE 6.0f
+#define SLIDER_BORDERS_SIZE 2.0f
 #define BG_VIEW_BORDERS_SIZE 3.0f
 
 -(id)initWithFrame:(CGRect)frame asset:(AVAsset *)asset{
@@ -70,7 +70,7 @@
     if (self) {
         _frame_width = frame.size.width;
         
-        int thumbWidth = ceil(frame.size.width*0.05);
+        int thumbWidth = ceil(frame.size.width*0.03);
         
         _bgView = [[UIControl alloc] initWithFrame:CGRectMake(thumbWidth-BG_VIEW_BORDERS_SIZE, 0, frame.size.width-(thumbWidth*2)+BG_VIEW_BORDERS_SIZE*2, frame.size.height)];
         _bgView.layer.borderColor = [UIColor grayColor].CGColor;
@@ -78,20 +78,20 @@
         [self addSubview:_bgView];
         
         _topBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, SLIDER_BORDERS_SIZE)];
-        _topBorder.backgroundColor = [UIColor colorWithRed: 0.996 green: 0.951 blue: 0.502 alpha: 1];
+        _topBorder.backgroundColor = kAppleColor;
         [self addSubview:_topBorder];
         
         
         _bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, frame.size.height-SLIDER_BORDERS_SIZE, frame.size.width, SLIDER_BORDERS_SIZE)];
-        _bottomBorder.backgroundColor = [UIColor colorWithRed: 0.992 green: 0.902 blue: 0.004 alpha: 1];
+        _bottomBorder.backgroundColor = kAppleColor;
         [self addSubview:_bottomBorder];
         
         
-        _leftThumb = [[SASliderLeft alloc] initWithFrame:CGRectMake(0, 0, thumbWidth, frame.size.height)];
+        _leftThumb = [[UIView alloc] initWithFrame:CGRectMake(0, 0, thumbWidth, frame.size.height)];
         _leftThumb.contentMode = UIViewContentModeLeft;
         _leftThumb.userInteractionEnabled = YES;
         _leftThumb.clipsToBounds = YES;
-        _leftThumb.backgroundColor = [UIColor clearColor];
+        _leftThumb.backgroundColor = kAppleColor;
         _leftThumb.layer.borderWidth = 0;
         [self addSubview:_leftThumb];
         
@@ -100,12 +100,12 @@
         [_leftThumb addGestureRecognizer:leftPan];
         
         
-        _rightThumb = [[SASliderRight alloc] initWithFrame:CGRectMake(0, 0, thumbWidth, frame.size.height)];
+        _rightThumb = [[UIView alloc] initWithFrame:CGRectMake(0, 0, thumbWidth, frame.size.height)];
         
         _rightThumb.contentMode = UIViewContentModeRight;
         _rightThumb.userInteractionEnabled = YES;
         _rightThumb.clipsToBounds = YES;
-        _rightThumb.backgroundColor = [UIColor clearColor];
+        _rightThumb.backgroundColor = kAppleColor;
         [self addSubview:_rightThumb];
         
         UIPanGestureRecognizer *rightPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightPan:)];
@@ -125,16 +125,16 @@
         [_centerView addGestureRecognizer:centerPan];
         
         
-        _popoverBubble = [[SAResizibleBubble alloc] initWithFrame:CGRectMake(0, -50, 100, 50)];
+        _popoverBubble = [[UIView alloc] initWithFrame:CGRectMake(0, -50, 100, 50)];
         _popoverBubble.alpha = 0;
-        _popoverBubble.backgroundColor = [UIColor clearColor];
+        _popoverBubble.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8];
         [self addSubview:_popoverBubble];
         
         
         _bubleText = [[UILabel alloc] initWithFrame:_popoverBubble.frame];
         _bubleText.font = [UIFont boldSystemFontOfSize:20];
         _bubleText.backgroundColor = [UIColor clearColor];
-        _bubleText.textColor = [UIColor blackColor];
+        _bubleText.textColor = [UIColor whiteColor];
         _bubleText.textAlignment = UITextAlignmentCenter;
         
         [_popoverBubble addSubview:_bubleText];
