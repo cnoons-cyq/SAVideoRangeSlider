@@ -175,7 +175,7 @@
 
 - (void)delegateNotification:(BOOL)isLeftHandle
 {
-    if ([_delegate respondsToSelector:@selector(videoRange:didChangeLeftPosition:rightPosition:)]){
+    if ([_delegate respondsToSelector:@selector(videoRange:didChangeLeftPosition:rightPosition:isLeftHandle:)]){
         [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition isLeftHandle:isLeftHandle];
     }
     
