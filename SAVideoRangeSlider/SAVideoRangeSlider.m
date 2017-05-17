@@ -24,7 +24,7 @@
 // THE SOFTWARE.
 
 #import "SAVideoRangeSlider.h"
-#define kAppleColor [UIColor colorWithRed:251.0f/255.0f green:168.0f/255.0f blue:72.0f/255.0f alpha:1.0f]
+#define kAppleColor [UIColor colorWithRed:255.0f/255.0f green:48.0f/255.0f blue:16.0f/255.0f alpha:1.0f]
 @interface SAVideoRangeSlider ()
 
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
@@ -347,7 +347,7 @@
     }
     self.imageGenerator.appliesPreferredTrackTransform = YES;
     
-    int picWidth = 20;
+    int picWidth = 60;
     
     // First image
     NSError *error;
