@@ -40,6 +40,7 @@
 
 @implementation SAVideoRangeSlider
 @synthesize leftPosition = _leftPosition, rightPosition =_rightPosition;
+@synthesize isLastHandleLeft = _isLastHandleLeft;
 
 #define SLIDER_BORDERS_SIZE 2.0f
 #define BG_VIEW_BORDERS_SIZE 3.0f
@@ -172,10 +173,10 @@
 }
 
 
-- (void)delegateNotification
+- (void)delegateNotification:(BOOL)isLeftHandle
 {
     if ([_delegate respondsToSelector:@selector(videoRange:didChangeLeftPosition:rightPosition:)]){
-        [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition];
+        [_delegate videoRange:self didChangeLeftPosition:self.leftPosition rightPosition:self.rightPosition isLeftHandle:isLeftHandle];
     }
     
 }
@@ -214,7 +215,8 @@
         
         [self setNeedsLayout];
         
-        [self delegateNotification];
+        _isLastHandleLeft = YES;
+        [self delegateNotification: YES];
         
     }
     
@@ -258,7 +260,8 @@
         
         [self setNeedsLayout];
         
-        [self delegateNotification];
+        _isLastHandleLeft = NO;
+        [self delegateNotification: NO];
         
     }
     
@@ -293,7 +296,7 @@
         
         [self setNeedsLayout];
         
-        [self delegateNotification];
+        [self delegateNotification: _isLastHandleLeft];
         
     }
     

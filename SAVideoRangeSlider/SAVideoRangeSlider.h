@@ -40,6 +40,7 @@
 @property (nonatomic, weak) id <SAVideoRangeSliderDelegate> delegate;
 @property (nonatomic) CGFloat leftPosition;
 @property (nonatomic) CGFloat rightPosition;
+@property (nonatomic) BOOL isLastHandleLeft;
 @property (nonatomic, strong) UILabel *bubleText;
 @property (nonatomic, strong) UIView *topBorder;
 @property (nonatomic, strong) UIView *bottomBorder;
@@ -60,7 +61,7 @@
 
 @optional
 
-- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
+- (void)videoRange:(SAVideoRangeSlider *)videoRange didChangeLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition isLeftHandle:(BOOL)leftHandle;
 
 - (void)videoRange:(SAVideoRangeSlider *)videoRange didGestureStateEndedLeftPosition:(CGFloat)leftPosition rightPosition:(CGFloat)rightPosition;
 
